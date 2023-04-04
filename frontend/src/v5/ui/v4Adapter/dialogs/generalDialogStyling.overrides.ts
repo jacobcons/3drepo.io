@@ -49,6 +49,7 @@ const contentStyling = css`
 	.MuiDialogContent-root {
 		overflow-x: hidden;
 		max-width: 600px;
+		min-width: 200px;
 		padding: 30px;
 		background-color: ${({ theme }) => theme.palette.tertiary.lightest};
 		color: ${({ theme }) => theme.palette.secondary.main};
