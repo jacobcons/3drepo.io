@@ -34,7 +34,7 @@ import {
 	V5_ISSUE_TABS,
 } from '../../../../../../constants/issues';
 import { LONG_TEXT_CHAR_LIM, VIEWER_PANELS_TITLES } from '../../../../../../constants/viewerGui';
-import { canChangeAssigned, canChangeBasicProperty, canComment } from '../../../../../../helpers/issues';
+import { canChangeAssigned, canComment } from '../../../../../../helpers/issues';
 import { VALIDATIONS_MESSAGES } from '../../../../../../services/validation';
 import { AttachmentsFormTab } from '../../../risks/components/attachmentsFormTab/attachmentsFormTab.component';
 import { SequencingFormTab } from '../../../risks/components/sequencingFormTab/sequencingFormTab.component';
@@ -189,7 +189,7 @@ class IssueDetailsFormComponent extends PureComponent<IProps, IState> {
 			setMeasurementName={this.props.setMeasurementName}
 			setMeasureMode={this.props.setMeasureMode}
 			shapes={this.props.issue.shapes}
-			addButtonsEnabled={!this.props.horizontal}
+			addButtonsEnabled={!this.props.horizontal && this.canEditViewpoint}
 		/>
 	)
 
