@@ -25,6 +25,7 @@ export default css`
 			margin: -2px 0 16px;
 		}
 		${StyledSelect} {
+			z-index: 1;
 			[role="button"] {
 				margin: 0;
 				padding: 0 10px;
