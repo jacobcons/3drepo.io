@@ -135,9 +135,15 @@ export class Compare extends PureComponent<IProps, any> {
 	));
 
 	public componentDidMount() {
-		// if (!this.props.compareModels.length) {
-		// 	this.props.getCompareModels(this.props.revision);
-		// }
+		const { isFederation, setComponentState, selectedItemsMap, compareModels } = this.props;
+		if (!isFederation) {
+			setComponentState({
+				'selectedDiffModelsMap': {
+					...selectedItemsMap,
+					[compareModels[0]._id]: true,
+				}
+			});
+		}
 	}
 
 	public renderClashTabLabel = () => {
