@@ -54,6 +54,7 @@ const connect = (username, password) => MongoClient.connect(
 	{
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
+		serverSelectionTimeoutMS: 2000,
 	},
 );
 
@@ -95,13 +96,14 @@ DBHandler._context = {
 	connect, getDB,
 };
 
-DBHandler.authenticate = async (user, password) => {
+DBHandler.authenticate = async (user, password, throwOnErr) => {
 	let conn;
 	let success = true;
 	try {
 		conn = await connect(user, password);
 		await conn.db(ADMIN_DB);
 	} catch (err) {
+		if (throwOnErr) throw err;
 		success = false;
 	} finally {
 		if (conn) {
@@ -129,7 +131,7 @@ const ensureDefaultRoleExists = () => {
 	return defaultRoleProm;
 };
 
-DBHandler.canConnect = () => DBHandler.authenticate();
+DBHandler.canConnect = (shouldThrow = false) => DBHandler.authenticate(undefined, undefined, shouldThrow);
 DBHandler.disconnect = async () => {
 	const dummyObj = { close: /* istanbul ignore next */ () => {} };
 	if (dbConn) {

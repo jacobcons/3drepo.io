@@ -39,7 +39,11 @@ Users.validateLoginData = async (req, res, next) => {
 
 	try {
 		await schema.validate(req.body);
+	} catch (err) {
+		respond(req, res, createResponseCode(templates.invalidArguments, err?.message));
+	}
 
+	try {
 		const usernameOrEmail = req.body.user;
 		const { user, customData: { sso } } = await getUserByUsernameOrEmail(usernameOrEmail, { user: 1, 'customData.sso': 1 });
 
@@ -55,7 +59,7 @@ Users.validateLoginData = async (req, res, next) => {
 			respond(req, res, templates.incorrectUsernameOrPassword);
 			return;
 		}
-		respond(req, res, createResponseCode(templates.invalidArguments, err?.message));
+		respond(req, res, err);
 	}
 };
 
