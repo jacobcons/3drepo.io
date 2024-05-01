@@ -177,7 +177,7 @@ const establishRoutes = () => {
 	 *             properties:
 	 *               tag:
 	 *                 description: Unique revision name
-     *                 type: string
+	 *                 type: string
 	 *                 example: rev01
 	 *               desc:
 	 *                 description: Description of the revision

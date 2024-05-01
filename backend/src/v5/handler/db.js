@@ -49,13 +49,7 @@ const getURL = /* istanbul ignore next */(username, password) => {
 	return urlElements.join('');
 };
 
-const connect = (username, password) => MongoClient.connect(
-	getURL(username, password),
-	{
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	},
-);
+const connect = (username, password) => MongoClient.connect(getURL(username, password));
 
 const getDB = async (db) => {
 	if (!dbConn) {
